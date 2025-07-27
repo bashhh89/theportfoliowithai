@@ -1,0 +1,425 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg: #000;
+  --text: #fff;
+  --accent: #00ff9d;
+  --accent-glow: rgba(0, 255, 157, 0.2);
+  --grid-color: rgba(255, 255, 255, 0.03);
+}
+
+* {
+  font-family: 'Inter', 'Courier New', monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+  mix-blend-mode: difference;
+}
+
+.custom-cursor::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Binary Rain Background */
+.binary-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -2;
+  opacity: 0.1;
+}
+
+.binary-char {
+  position: absolute;
+  color: var(--accent);
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  animation: fall linear forwards;
+}
+
+/* Futuristic Grid Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Custom animations */
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes shine {
+  0% { 
+    transform: translate(-50%, -50%) rotate(45deg);
+    left: -100%;
+  }
+  100% { 
+    transform: translate(50%, 50%) rotate(45deg);
+    left: 100%;
+  }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
+  50% { box-shadow: 0 0 40px var(--accent-glow), 0 0 60px var(--accent-glow); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Custom utility classes */
+.text-accent {
+  color: var(--accent);
+}
+
+.border-accent {
+  border-color: var(--accent);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.hover-glow:hover {
+  animation: glow 2s infinite;
+}
+
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  animation: shine 3s infinite;
+}
+
+.grid-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.grid-card:hover {
+  border-color: var(--accent);
+  background: rgba(0, 255, 157, 0.05);
+}
+
+.accent-border-left {
+  border-left: 3px solid var(--accent);
+}
+
+.futuristic-button {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.futuristic-button:hover {
+  background: var(--accent);
+  color: #111;
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.futuristic-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.futuristic-button:hover::before {
+  left: 0;
+}
+
+/* Circuit Lines */
+.circuit-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+}
+
+.circuit-line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  height: 1px;
+  width: 100%;
+  animation: pulse 2s infinite;
+}
+
+.circuit-line:nth-child(odd) {
+  animation-delay: 0.5s;
+}
+
+.circuit-line:nth-child(even) {
+  animation-delay: 1s;
+}
+
+/* AI Element */
+.ai-element {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 1px solid rgba(0, 255, 157, 0.4);
+  border-radius: 50%;
+  top: 20%;
+  right: 30%;
+  animation: rotate 20s linear infinite;
+}
+
+.ai-element::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  top: 50%;
+  left: -5px;
+  transform: translateY(-50%);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.ai-element::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  top: 50%;
+  right: -5px;
+  transform: translateY(-50%);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+/* Scanning effect for cards */
+.scan-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: scan 3s linear infinite;
+}
+
+/* Typewriter effect */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid var(--accent);
+  white-space: nowrap;
+  animation: typewriter 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--accent); }
+}
+
+/* Glitch effect */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  animation: glitch-1 0.5s infinite;
+  color: #ff0040;
+  z-index: -1;
+}
+
+.glitch::after {
+  animation: glitch-2 0.5s infinite;
+  color: #00ffff;
+  z-index: -2;
+}
+
+@keyframes glitch-1 {
+  0%, 14%, 15%, 49%, 50%, 99%, 100% {
+    transform: translate(0);
+  }
+  15%, 49% {
+    transform: translate(-2px, -1px);
+  }
+}
+
+@keyframes glitch-2 {
+  0%, 20%, 21%, 62%, 63%, 99%, 100% {
+    transform: translate(0);
+  }
+  21%, 62% {
+    transform: translate(2px, 1px);
+  }
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --radius: 0.625rem;
+  /* Deep charcoal background theme */
+  --background: 220 13% 9%; /* Deep charcoal */
+  --foreground: 0 0% 98%; /* Crisp white */
+  --card: 220 13% 12%; /* Slightly lighter charcoal */
+  --card-foreground: 0 0% 98%;
+  --popover: 220 13% 12%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 217 91% 60%; /* Electric blue */
+  --primary-foreground: 0 0% 98%;
+  --secondary: 220 13% 15%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 220 13% 15%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 217 91% 60%; /* Electric blue accent */
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 220 13% 20%;
+  --input: 220 13% 15%;
+  --ring: 217 91% 60%; /* Electric blue ring */
+}
+
+/* Dark mode is our default, but keeping this for consistency */
+.dark {
+  --background: 220 13% 9%; /* Deep charcoal */
+  --foreground: 0 0% 98%; /* Crisp white */
+  --card: 220 13% 12%;
+  --card-foreground: 0 0% 98%;
+  --popover: 220 13% 12%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 217 91% 60%; /* Electric blue */
+  --primary-foreground: 0 0% 98%;
+  --secondary: 220 13% 15%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 220 13% 15%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 217 91% 60%; /* Electric blue accent */
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 220 13% 20%;
+  --input: 220 13% 15%;
+  --ring: 217 91% 60%; /* Electric blue ring */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
