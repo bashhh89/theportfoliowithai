@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Living Portfolio with AI
 
-## Getting Started
+A modern, AI-powered portfolio website featuring interactive chat, lead generation, and dynamic content management.
 
-First, run the development server:
+## Features
 
+- **AI Chat Widget**: Interactive AI assistant powered by Mistral AI
+- **Lead Generation**: Automated lead qualification and notification system
+- **Dynamic Content**: AI-powered content generation and management
+- **Responsive Design**: Mobile-first, modern UI with smooth animations
+- **Admin Dashboard**: Content management and analytics interface
+- **Real-time Analytics**: Built-in tracking and visitor insights
+- **Supabase Integration**: Secure database and authentication
+
+## Tech Stack
+
+- **Frontend**: Next.js 14, React, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes, Supabase
+- **AI**: Mistral AI for chat and content generation
+- **Database**: PostgreSQL (via Supabase)
+- **Deployment**: Docker, EasyPanel ready
+
+## Quick Start
+
+### Development
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/bashhh89/theportfoliowithai.git
+cd theportfoliowithai
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+pnpm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+# Edit .env.local with your configuration
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+```bash
+pnpm dev
+```
 
-## Learn More
+Open [http://localhost:3000](http://localhost:3000) to see the result.
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### EasyPanel Deployment (Recommended)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is optimized for EasyPanel deployment. See [EASYPANEL_DEPLOYMENT.md](./EASYPANEL_DEPLOYMENT.md) for detailed instructions.
 
-## Deploy on Vercel
+### Docker Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+# Build the image
+docker build -t living-portfolio .
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Run the container
+docker run -p 3000:3000 --env-file .env living-portfolio
+```
+
+### Docker Compose
+
+```bash
+docker-compose up -d
+```
+
+## Environment Variables
+
+Required environment variables:
+
+- `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Your Supabase anonymous key
+- `SUPABASE_SERVICE_ROLE_KEY` - Your Supabase service role key
+- `MISTRAL_API_KEY` - Your Mistral AI API key
+
+Optional:
+- `NEXT_PUBLIC_APP_URL` - Your app's public URL
+- `NODE_ENV` - Environment (development/production)
+
+## Database Setup
+
+1. Create a Supabase project
+2. Run the SQL migrations from `SUPABASE_SCHEMA.sql` and `SUPABASE_MIGRATION.sql`
+3. Configure your environment variables
+
+## API Endpoints
+
+- `/api/chat` - AI chat functionality
+- `/api/analyze-website` - Website analysis
+- `/api/notify-lead` - Lead notification system
+- `/api/health` - Health check endpoint
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## License
+
+MIT License - see LICENSE file for details
+
+## Support
+
+For issues or questions, please open an issue on GitHub or contact support.

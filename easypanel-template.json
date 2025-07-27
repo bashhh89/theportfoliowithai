@@ -1,0 +1,65 @@
+{
+  "name": "Living Portfolio with AI",
+  "description": "A modern, AI-powered portfolio website with chat functionality, lead generation, and dynamic content",
+  "logo": "https://raw.githubusercontent.com/bashhh89/theportfoliowithai/main/public/next.svg",
+  "tags": ["AI", "Portfolio", "Next.js", "Chat", "Lead Generation"],
+  "services": [
+    {
+      "name": "portfolio",
+      "image": {
+        "type": "build",
+        "dockerfile": "Dockerfile"
+      },
+      "domains": [
+        {
+          "host": "$(EASYPANEL_DOMAIN)",
+          "port": 3000
+        }
+      ],
+      "env": [
+        {
+          "key": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "key": "NEXT_PUBLIC_SUPABASE_URL",
+          "value": "$(NEXT_PUBLIC_SUPABASE_URL)"
+        },
+        {
+          "key": "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+          "value": "$(NEXT_PUBLIC_SUPABASE_ANON_KEY)"
+        },
+        {
+          "key": "SUPABASE_SERVICE_ROLE_KEY",
+          "value": "$(SUPABASE_SERVICE_ROLE_KEY)"
+        },
+        {
+          "key": "MISTRAL_API_KEY",
+          "value": "$(MISTRAL_API_KEY)"
+        },
+        {
+          "key": "NEXT_PUBLIC_APP_URL",
+          "value": "https://$(EASYPANEL_DOMAIN)"
+        }
+      ],
+      "ports": [
+        {
+          "published": 3000,
+          "target": 3000
+        }
+      ],
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "portfolio_logs",
+          "target": "/app/logs"
+        }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "name": "portfolio_logs"
+    }
+  ]
+}
