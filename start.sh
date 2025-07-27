@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Start script for deployment
-echo "Starting Living Portfolio with AI..."
+# Start script for development deployment
+echo "Starting Living Portfolio with AI in development mode..."
 
 # Create logs directory if it doesn't exist
 mkdir -p logs
 
 # Set default values for optional environment variables
-export NODE_ENV=${NODE_ENV:-production}
+export NODE_ENV=${NODE_ENV:-development}
 export PORT=${PORT:-3000}
 
 # Set default APP_URL if not provided
@@ -29,7 +29,7 @@ if [ -z "$MISTRAL_API_KEY" ]; then
 fi
 
 echo "Environment configured successfully"
-echo "Starting Next.js application on port $PORT..."
+echo "Starting Next.js development server on port $PORT..."
 
-# Start the application
-exec pnpm start
+# Start in development mode (no build required)
+exec pnpm dev

@@ -4,12 +4,9 @@ nixPkgs = ["nodejs_18", "pnpm"]
 [phases.install]
 cmds = ["pnpm install --frozen-lockfile --prod=false"]
 
-[phases.build]
-cmds = ["pnpm run build"]
-
 [start]
-cmd = "pnpm start"
+cmd = "pnpm dev"
 
 [variables]
-NODE_ENV = "production"
+NODE_ENV = "development"
 PORT = "3000"

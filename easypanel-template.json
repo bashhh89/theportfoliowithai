@@ -19,7 +19,7 @@
       "env": [
         {
           "key": "NODE_ENV",
-          "value": "production"
+          "value": "development"
         },
         {
           "key": "NEXT_PUBLIC_SUPABASE_URL",
