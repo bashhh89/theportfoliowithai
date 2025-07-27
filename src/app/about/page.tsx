@@ -1,6 +1,8 @@
 import Link from "next/link";
 
-export default function AboutPax-auto py-16">
+export default function About() {
+  return (
+    <div className="container mx-auto px-4 py-16">
       <h1 className="text-4xl font-bold text-foreground mb-8">
         I Live in the Gap Between Business and AI.
       </h1>
