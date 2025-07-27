@@ -1,34 +1,35 @@
 #!/bin/bash
 
-# Start script for EasyPanel deployment
+# Start script for deployment
 echo "Starting Living Portfolio with AI..."
 
-# Check if required environment variables are set
-if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ]; then
-    echo "Error: NEXT_PUBLIC_SUPABASE_URL is not set"
-    exit 1
-fi
-
-if [ -z "$NEXT_PUBLIC_SUPABASE_ANON_KEY" ]; then
-    echo "Error: NEXT_PUBLIC_SUPABASE_ANON_KEY is not set"
-    exit 1
-fi
-
-if [ -z "$MISTRAL_API_KEY" ]; then
-    echo "Error: MISTRAL_API_KEY is not set"
-    exit 1
-fi
-
 # Create logs directory if it doesn't exist
-mkdir -p /app/logs
+mkdir -p logs
+
+# Set default values for optional environment variables
+export NODE_ENV=${NODE_ENV:-production}
+export PORT=${PORT:-3000}
 
 # Set default APP_URL if not provided
 if [ -z "$NEXT_PUBLIC_APP_URL" ]; then
-    export NEXT_PUBLIC_APP_URL="http://localhost:3000"
+    export NEXT_PUBLIC_APP_URL="http://localhost:$PORT"
 fi
 
-echo "Environment variables configured successfully"
-echo "Starting Next.js application..."
+# Check if required environment variables are set (warn but don't exit)
+if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ]; then
+    echo "Warning: NEXT_PUBLIC_SUPABASE_URL is not set - some features may not work"
+fi
+
+if [ -z "$NEXT_PUBLIC_SUPABASE_ANON_KEY" ]; then
+    echo "Warning: NEXT_PUBLIC_SUPABASE_ANON_KEY is not set - some features may not work"
+fi
+
+if [ -z "$MISTRAL_API_KEY" ]; then
+    echo "Warning: MISTRAL_API_KEY is not set - AI chat will not work"
+fi
+
+echo "Environment configured successfully"
+echo "Starting Next.js application on port $PORT..."
 
 # Start the application
 exec pnpm start

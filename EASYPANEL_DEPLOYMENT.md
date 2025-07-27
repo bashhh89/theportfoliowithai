@@ -24,27 +24,51 @@ Set up the following environment variables in EasyPanel:
 
 ## Deployment Methods
 
-### Method 1: Using EasyPanel Template (Recommended)
+### Method 1: EasyPanel with Nixpacks (Recommended)
+
+1. Create a new service in EasyPanel
+2. Set the source to this GitHub repository: `https://github.com/bashhh89/theportfoliowithai`
+3. Set the branch to `easypanel-ready`
+4. Configure the environment variables (see below)
+5. EasyPanel will automatically detect the `nixpacks.toml` configuration
+6. Deploy the service
+
+### Method 2: Using EasyPanel Template
 
 1. In EasyPanel, go to "Services" → "Templates"
 2. Click "Add Template" and upload the `easypanel-template.json` file
 3. Fill in the required environment variables
 4. Deploy the service
 
-### Method 2: Manual Docker Deployment
+### Method 3: Docker Deployment
 
-1. Create a new service in EasyPanel
-2. Set the source to this GitHub repository: `https://github.com/bashhh89/theportfoliowithai`
-3. Set the branch to `easypanel-ready`
-4. Configure the environment variables
-5. Set the port to 3000
-6. Deploy
+1. Build and deploy using the provided Dockerfile
+2. Set up environment variables
+3. Deploy on port 3000
 
-### Method 3: Docker Compose
+### Method 4: Alternative Platforms
 
-1. Upload the `docker-compose.yml` file to your EasyPanel server
-2. Set up environment variables in a `.env` file
-3. Run: `docker-compose up -d`
+The project also supports deployment on:
+- Railway (uses `Procfile`)
+- Render
+- Vercel
+- Any Node.js hosting platform
+
+## Troubleshooting
+
+### Build Issues
+
+If you encounter build errors:
+
+1. **pnpm not found**: The `nixpacks.toml` file should handle this automatically
+2. **Package installation fails**: Check that `pnpm-lock.yaml` is present
+3. **Build timeout**: Increase build timeout in EasyPanel settings
+
+### Runtime Issues
+
+1. **Port binding**: Ensure the service is configured to use port 3000
+2. **Environment variables**: Check all required variables are set
+3. **Health check fails**: The app includes a `/api/health` endpoint for monitoring
 
 ## Database Setup
 
