@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     console.error('Generate reasoning API error:', error);
     
     // Fallback to default reasoning if AI fails
-    const fallbackReasoning = generateContextualReasoning(questionText, questionType, previousAnswers);
+    const fallbackReasoning = generateContextualReasoning(questionText || "", questionType || "", previousAnswers || []);
     return NextResponse.json({ reasoning: fallbackReasoning });
   }
 }
@@ -48,7 +48,8 @@ Keep it conversational, expert, and focused on the business value. Don't be gene
     maxTokens: 150
   });
 
-  return response.choices[0]?.message?.content || generateContextualReasoning(questionText, questionType, previousAnswers);
+  const aiContent = response.choices[0]?.message?.content;
+  return typeof aiContent === 'string' ? aiContent : generateContextualReasoning(questionText, questionType, previousAnswers);
 }
 
 function generateContextualReasoning(questionText: string, questionType: string, previousAnswers: any[]): string {
